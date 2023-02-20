@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using FluentValidation_in_DotNet_6.ApplicationDbContext;
 using FluentValidation_in_DotNet_6.Models;
 using FluentValidation_in_DotNet_6.Validators;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,11 @@ namespace FluentValidation_in_DotNet_6.Controllers
     public class CustomerController : ControllerBase
     {
         private IValidator<Customer> _validator;
-
-        public CustomerController (IValidator<Customer> validator) 
+        private readonly Database _context;
+        public CustomerController (IValidator<Customer> validator,Database context) 
         {
             _validator = validator;
+            _context = context;
         }
         // GET: api/<CustomerController>
         [HttpGet]
@@ -44,6 +46,8 @@ namespace FluentValidation_in_DotNet_6.Controllers
             {
                 return BadRequest(result.Errors);
             }
+            await  _context.Customer.AddAsync(customer);
+            await _context.SaveChangesAsync();
             return Ok(customer);    
         }
 

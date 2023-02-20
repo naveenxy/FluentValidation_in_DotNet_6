@@ -10,7 +10,7 @@ namespace FluentValidation_in_DotNet_6.Models
         public string Phone { get; set; }
         public int Age {  get; set; }
         public string Url { get; set; }
-        public Status Status { get; set; }
+        public Status.StatusTypes Status { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
