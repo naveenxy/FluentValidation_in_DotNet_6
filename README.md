@@ -19,3 +19,18 @@ We do not generally recommend using auto validation for new projects, but it is 
 
 /**
 With the manual validation approach, you’ll inject the validator into your controller (or Razor page) and invoke it against the model.
+
+
+Request Body for Post Customer
+{
+ 
+  "name": "Naveen",
+  "email": "naveenxy14@gmail.com",
+  "phone": "7338980569",
+  "age": 22,
+  "url": "https://outlook.office.com/mail/",
+  "status": 1,
+  "password": "Naveen@2000",
+  "confirmPassword": "Naveen@2000",
+  "creditCard": "4015610013636381"
+}
