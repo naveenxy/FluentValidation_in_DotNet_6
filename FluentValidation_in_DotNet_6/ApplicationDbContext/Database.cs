@@ -11,5 +11,15 @@ namespace FluentValidation_in_DotNet_6.ApplicationDbContext
 
         }
         public DbSet<Customer> Customer { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+
+            modelBuilder.Entity<Customer>()
+                .Property(s => s.Status)
+                .HasConversion<string>();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
