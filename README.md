@@ -14,3 +14,8 @@ Auto validation is not asynchronous: If your validator contains asynchronous rul
 Auto validation is MVC-only: Auto-validation only works with MVC Controllers and Razor Pages. It does not work with the more modern parts of ASP.NET such as Minimal APIs or Blazor.
 Auto validation is hard to debug: The ‘magic’ nature of auto-validation makes it hard to debug/troubleshoot if something goes wrong as so much is done behind the scenes.
 We do not generally recommend using auto validation for new projects, but it is still available for legacy implementations.
+
+
+
+/**
+With the manual validation approach, you’ll inject the validator into your controller (or Razor page) and invoke it against the model.
