@@ -24,11 +24,12 @@ With the manual validation approach, you’ll inject the validator into your con
 Request Body for Post Customer
 {
  
-  "name": "Naveen",
+  "firstName": "Naveen",
+"lastName" :"Kumar",
   "email": "naveenxy14@gmail.com",
   "phone": "7338980569",
   "age": 22,
-  "url": "https://outlook.office.com/mail/",
+  "url": "https://github.com/naveenxy",
   "status": 1,
   "password": "Naveen@2000",
   "confirmPassword": "Naveen@2000",
