@@ -1,7 +1,10 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using FluentValidation_in_DotNet_6.ApplicationDbContext;
 using FluentValidation_in_DotNet_6.Models;
 using FluentValidation_in_DotNet_6.Validators;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,6 +14,13 @@ namespace FluentValidation_in_DotNet_6.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private IValidator<Customer> _validator;
+        private readonly Database _context;
+        public CustomerController (IValidator<Customer> validator,Database context) 
+        {
+            _validator = validator;
+            _context = context;
+        }
         // GET: api/<CustomerController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -27,14 +37,17 @@ namespace FluentValidation_in_DotNet_6.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public ActionResult Post([FromBody] Customer customer)
+        public async Task<ActionResult> Post([FromBody] Customer customer)
         {
-            var validator = new CustomerValidation();
-            ValidationResult result = validator.Validate(customer);
+            //var validator = new CustomerValidation();
+            //ValidationResult result = validator.Validate(customer);
+            ValidationResult result = await _validator.ValidateAsync(customer);
             if (!result.IsValid)
             {
                 return BadRequest(result.Errors);
             }
+            await  _context.Customer.AddAsync(customer);
+            await _context.SaveChangesAsync();
             return Ok(customer);    
         }
 

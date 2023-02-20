@@ -2,7 +2,7 @@
 {
     public class Status
     {
-        enum status
+       public enum StatusTypes
         {
             Active,InActive
         }

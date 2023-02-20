@@ -7,10 +7,16 @@ namespace FluentValidation_in_DotNet_6.Validators
     {
         public CustomerValidation()
         {
-            RuleFor(c => c.Name)
+            RuleFor(c => c.FirstName)
             .NotEmpty()
-            .WithMessage("Please enter a name.")
-            .Length(2, 50);
+            .WithMessage("Please enter your First name.")
+            .Length(1, 50);
+
+            RuleFor(c => c.LastName)
+           .NotEmpty()
+           .WithMessage("Please enter your Last name.")
+           .Length(1, 50).NotEqual(x=>x.FirstName)
+           .WithMessage("your First Name and Last Name Should not be Same");
 
             RuleFor(c => c.Email)
                 .NotEmpty()
@@ -42,7 +48,8 @@ namespace FluentValidation_in_DotNet_6.Validators
 
             RuleFor(c => c.Status)
                 .NotNull()
-                .WithMessage("Please select a status.");
+                .WithMessage("Please select a status.").IsInEnum();
+                 
                 
 
             RuleFor(c => c.Password)
